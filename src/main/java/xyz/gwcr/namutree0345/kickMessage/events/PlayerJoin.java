@@ -9,6 +9,7 @@ import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.event.ServerConnectedEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import xyz.gwcr.namutree0345.kickMessage.Main;
 
 import java.util.HashMap;
 
@@ -27,7 +28,11 @@ public class PlayerJoin implements Listener {
                 public void done(Boolean aBoolean, Throwable throwable) {
                     if(throwable != null) {
                         System.out.println("[INFO] Caught error");
-                        event.getPlayer().disconnect(new TextComponent("첫번째줄\n두번째줄"));
+                        if(Main.message == null) {
+                            event.getPlayer().disconnect(new TextComponent("첫번째줄\n두번째줄"));
+                        } else {
+                            event.getPlayer().disconnect(new TextComponent(Main.message));
+                        }
                     }
                 }
             });
