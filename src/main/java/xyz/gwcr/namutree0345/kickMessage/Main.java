@@ -17,10 +17,12 @@ public class Main extends Plugin {
     public void onEnable() {
         if(!this.getDataFolder().exists()) getDataFolder().mkdir();
 
-        File file = new File(getDataFolder(), "config.yml");
+        File file = new File(getDataFolder() + "/config.yml");
         try {
-            Files.copy(getResourceAsStream("config.yml"), file.toPath());
+            if(!file.exists()) {
+                file.createNewFile();
 
+            }
             Configuration conf = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
             message = conf.getString("kick_message");
         } catch (IOException e) {
